@@ -127,9 +127,8 @@ vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldcolumn = '0'
 vim.opt.foldtext = ''
--- Any fold except the first level are closed by default.
+-- Not to close any fold at start.
 vim.opt.foldlevel = 99
-vim.opt.foldlevelstart = 1
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
