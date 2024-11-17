@@ -768,8 +768,25 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'copilot' },
+        },
+        -- configure lspkind icons
+        formatting = {
+          format = lspkind.cmp_format {
+            mode = 'symbol_text',
+            maxwidth = {
+              menu = 50,
+              abbr = 50,
+            },
+            ellipsis = '...',
+            show_labelDetails = true,
+            symbol_map = {
+              Copilot = '',
+            },
+          },
         },
       }
+      vim.api.nvim_set_hl(0, 'CmpItemKindCopilot', { fg = '#6CC644' })
     end,
   },
 
