@@ -120,6 +120,17 @@ vim.keymap.set('n', 'k', 'gk', { desc = 'Move up one visual line.' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Keep in visual mode after adding an indentation.' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Keep in visual mode after removing an indentation.' })
 
+-- Code folding capability
+-- https://www.jackfranklin.co.uk/blog/code-folding-in-vim-neovim/
+-- Treesitter is used.
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldcolumn = '0'
+vim.opt.foldtext = ''
+-- Any fold except the first level are closed by default.
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 1
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
