@@ -354,8 +354,6 @@ require('lazy').setup({
         builtin.find_files { cwd = vim.fn.expand '%:p:h' }
       end, { desc = 'Find files in the same folder as the active buffer' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-      -- <leader>st to search all terminals in buffers
-      vim.keymap.set('n', '<leader>st', builtin.terminals, { desc = '[S]earch [T]erminals' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
