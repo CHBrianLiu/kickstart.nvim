@@ -254,9 +254,8 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
-        { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
         { '<leader>d', group = '[D]ocument' },
-        { '<leader>r', group = '[R]ename' },
+        { '<leader>r', group = '[R]efactor', mode = { 'n', 'x' } },
         { '<leader>s', group = '[S]earch' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
@@ -351,6 +350,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>s;', function()
+        builtin.find_files { cwd = vim.fn.expand '%:p:h' }
+      end, { desc = 'Find files in the same folder as the active buffer' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -481,7 +483,7 @@ require('lazy').setup({
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+          map('<leader>rr', vim.lsp.buf.code_action, 'Code Action ([R]efactoring)', { 'n', 'x' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -620,7 +622,7 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>rf',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -692,12 +694,15 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      -- modern-look cmp
+      'onsails/lspkind-nvim',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+      local lspkind = require 'lspkind'
 
       cmp.setup {
         snippet = {
@@ -728,14 +733,14 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          --['<CR>'] = cmp.mapping.confirm { select = true },
-          --['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          -- ['<Tab>'] = cmp.mapping.select_next_item(),
           --['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete {},
+          ['<C-i>'] = cmp.mapping.complete {},
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
