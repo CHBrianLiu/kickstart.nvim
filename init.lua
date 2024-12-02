@@ -559,7 +559,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -583,6 +583,20 @@ require('lazy').setup({
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
+          },
+        },
+        dockerls = {},
+        docker_compose_language_service = {},
+        yamlls = {},
+        vacuum = {},
+        pylsp = {},
+        jsonls = {
+          -- jsonls only suports format in range, so we need to override the default format
+          -- https://github.com/neovim/nvim-lspconfig/issues/372#issuecomment-755992086
+          format = {
+            function()
+              vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line '$', 0 })
+            end,
           },
         },
       }
