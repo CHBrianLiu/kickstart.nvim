@@ -593,6 +593,7 @@ require('lazy').setup({
         docker_compose_language_service = {},
         yamlls = {},
         vacuum = {},
+        pyright = {},
         pylsp = {},
         jsonls = {
           -- jsonls only suports format in range, so we need to override the default format
