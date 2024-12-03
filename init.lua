@@ -756,7 +756,13 @@ require('lazy').setup({
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
           --  completions whenever it has completion options available.
+          [',.'] = cmp.mapping.complete {},
+          -- <C-i> in insert mode is a tab key. See :h i_CTRL-I.
+          -- Keep it for the convention usage.
           ['<C-i>'] = cmp.mapping.complete {},
+
+          -- abort when escape is hit
+          ['<Esc>'] = cmp.mapping.abort(),
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
           --  So if you have a snippet that's like:
