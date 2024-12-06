@@ -29,6 +29,9 @@ return {
       require('CopilotChat.integrations.cmp').setup()
       local chat = require 'CopilotChat'
       vim.keymap.set('n', '<leader>cc', chat.toggle, { desc = 'Toggle [C]opilot [C]hat window.' })
+      vim.keymap.set('v', '<leader>cc', chat.toggle, { desc = 'Toggle [C]opilot [C]hat window.' })
+      -- choose the chat model
+      vim.keymap.set('n', '<leader>cm', chat.select_model, { desc = 'Choose [C]opilot [M]odel.' })
     end,
   },
 }
