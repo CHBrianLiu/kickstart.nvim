@@ -137,6 +137,10 @@ vim.opt.foldtext = ''
 -- Not to close any fold at start.
 vim.opt.foldlevel = 99
 
+-- Enable project-specific scripts
+-- This allows you to have a `.nvim.lua` file in your project root
+vim.opt.exrc = true
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
