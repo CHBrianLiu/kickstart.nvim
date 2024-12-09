@@ -123,6 +123,9 @@ vim.keymap.set('n', 'k', 'gk', { desc = 'Move up one visual line.' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Keep in visual mode after adding an indentation.' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Keep in visual mode after removing an indentation.' })
 
+-- Replace the word under the cursor with the one just yanked
+vim.keymap.set('n', 'PP', 'viw"_dP', { desc = 'Replace the word under the cursor with the one just yanked' })
+
 -- Copy the current file path to the clipboard
 vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<CR>', { noremap = true, silent = true, desc = 'Copy [F]ile relative [p]ath' })
 vim.keymap.set('n', '<leader>fP', ':let @+ = expand("%:p")<CR>', { noremap = true, silent = true, desc = 'Copy [File] absolute [P]ath' })
@@ -623,6 +626,7 @@ require('lazy').setup({
             end,
           },
         },
+        ts_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -691,7 +695,7 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
+        python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
