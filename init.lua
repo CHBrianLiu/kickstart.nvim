@@ -374,9 +374,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fR', builtin.jumplist, { desc = 'Search [R]ecent locations' })
       vim.keymap.set('n', '<leader>fb', builtin.marks, { desc = 'Search [M]arks' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-      vim.keymap.set('n', '<leader>f;', function()
-        builtin.find_files { cwd = vim.fn.expand '%:p:h' }
-      end, { desc = 'Find files in the same folder as the active buffer' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 
       -- Slightly advanced example of overriding default behavior and theme
