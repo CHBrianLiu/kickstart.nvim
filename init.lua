@@ -133,7 +133,8 @@ vim.keymap.set('n', 'k', 'gk', { desc = 'Move up one visual line.' })
 vim.keymap.set('v', '>', '>gv', { desc = 'Keep in visual mode after adding an indentation.' })
 vim.keymap.set('v', '<', '<gv', { desc = 'Keep in visual mode after removing an indentation.' })
 
--- Replace the word under the cursor with the one just yanked
+-- Better pasting experience
+vim.keymap.set('n', 'pp', '"0p', { desc = 'Paste the content explicitly yanked.' })
 vim.keymap.set('n', 'PP', 'viw"_dP', { desc = 'Replace the word under the cursor with the one just yanked' })
 
 -- Copy the current file path to the clipboard
