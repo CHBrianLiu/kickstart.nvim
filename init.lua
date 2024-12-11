@@ -78,6 +78,9 @@ vim.opt.statusline = ''
 -- i am not used to have status line per window
 vim.opt.laststatus = 3
 
+-- auto save
+vim.opt.autowriteall = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
