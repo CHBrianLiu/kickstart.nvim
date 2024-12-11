@@ -23,7 +23,7 @@ return {
       workspaces = {
         {
           name = 'workspace',
-          path = '~/OneDrive/notes',
+          path = '~/notes',
         },
       },
       ui = {
