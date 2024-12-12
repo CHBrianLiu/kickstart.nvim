@@ -400,13 +400,7 @@ require('lazy').setup({
 
       -- Slightly advanced example of overriding default behavior and theme
       -- Like a super search '/'
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
