@@ -81,6 +81,15 @@ vim.opt.laststatus = 3
 -- auto save
 vim.opt.autowriteall = true
 
+-- Four spaces for indentation
+-- jsonls will reference these values for formatting
+-- Set the number of spaces to use for each step of (auto)indent
+vim.opt.shiftwidth = 4
+-- Set the number of spaces that a <Tab> in the file counts for
+vim.opt.tabstop = 4
+-- Use spaces instead of tabs
+vim.opt.expandtab = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -632,7 +641,7 @@ require('lazy').setup({
           -- https://github.com/neovim/nvim-lspconfig/issues/372#issuecomment-755992086
           format = {
             function()
-              vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line '$', 0 })
+              vim.lsp.buf.format { range = { start = { 0, 0 }, ['end'] = { vim.fn.line '$', 0 } } }
             end,
           },
         },
