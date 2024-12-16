@@ -131,8 +131,10 @@ vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Esc' })
 -- Easy movements within the same line
 vim.keymap.set('n', 'H', '0', { desc = 'Move the cursor to the start of the line.' })
 vim.keymap.set('v', 'H', '0', { desc = 'Move the cursor to the start of the line.' })
+vim.keymap.set('o', 'H', '0', { desc = 'Move the cursor to the start of the line.' })
 vim.keymap.set('n', 'L', '$', { desc = 'Move the cursor to the end of the line.' })
 vim.keymap.set('v', 'L', '$', { desc = 'Move the cursor to the end of the line.' })
+vim.keymap.set('o', 'L', '$', { desc = 'Move the cursor to the end of the line.' })
 
 -- Have j and k navigate visual lines rather than logical ones
 vim.keymap.set('n', 'j', 'gj', { desc = 'Move down one visual line.' })
