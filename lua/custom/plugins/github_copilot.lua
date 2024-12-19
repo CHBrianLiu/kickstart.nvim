@@ -1,14 +1,11 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    opts = {},
-  },
-  {
-    'zbirenbaum/copilot-cmp',
-    opts = {},
-    dependencies = {
-      'zbirenbaum/copilot.lua',
-    },
+    'github/copilot.vim',
+    config = function()
+      -- Trigger the suggestion manually
+      vim.g.copilot_enabled = false
+      vim.keymap.set('i', '<C-\\>', '<Plug>(copilot-suggest)', { desc = 'Trigger Copilot suggestion' })
+    end,
   },
   -- Copilot chat
   {
@@ -25,7 +22,14 @@ return {
     },
     build = 'make tiktoken',
     config = function()
-      require('CopilotChat').setup {}
+      require('CopilotChat').setup {
+        window = { layout = 'replace' },
+        mappings = {
+          reset = {
+            normal = '<leader>cr',
+          },
+        },
+      }
       require('CopilotChat.integrations.cmp').setup()
       local chat = require 'CopilotChat'
       vim.keymap.set('n', '<leader>cc', chat.toggle, { desc = 'Toggle [C]opilot [C]hat window.' })
