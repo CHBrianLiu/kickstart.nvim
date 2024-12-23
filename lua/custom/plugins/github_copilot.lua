@@ -10,6 +10,8 @@ return {
   -- Copilot chat
   {
     'CopilotC-Nvim/CopilotChat.nvim',
+    -- Some warning showing up saying the branch 'canary' (i guess the default one) is deprecated
+    branch = 'main',
     opts = {},
     dependencies = {
       { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
@@ -29,8 +31,8 @@ return {
             normal = '<leader>cr',
           },
         },
+        chat_autocomplete = true,
       }
-      require('CopilotChat.integrations.cmp').setup()
       local chat = require 'CopilotChat'
       vim.keymap.set('n', '<leader>cc', chat.toggle, { desc = 'Toggle [C]opilot [C]hat window.' })
       vim.keymap.set('v', '<leader>cc', chat.toggle, { desc = 'Toggle [C]opilot [C]hat window.' })
