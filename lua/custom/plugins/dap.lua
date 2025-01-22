@@ -43,13 +43,15 @@ return {
       local dappy = require 'dap-python'
       return {
         -- Basic debugging keymaps, feel free to change to your liking!
+        { '<leader>dD', dapui.toggle, desc = 'Toggle Debug UI' },
         { '<leader>ds', dap.continue, desc = 'Debug: Start/Continue' },
         { '<leader>dn', dap.step_into, desc = 'Debug: Step Into' },
         { '<leader>do', dap.step_over, desc = 'Debug: Step Over' },
         { '<leader>dN', dap.step_out, desc = 'Debug: Step Out' },
         { '<leader>db', dap.toggle_breakpoint, desc = 'Debug: Toggle Breakpoint' },
         { '<leader>dS', dap.close, desc = 'Debug: Close ([S]top) session' },
-        { '<leader>dr', dap.restart, desc = 'Debug: [R]top session' },
+        { '<leader>dr', dap.restart, desc = 'Debug: [R]estart session' },
+        { '<leader>dh', dap.run_to_cursor, desc = 'Debug: run to cursor ([H]ere)' },
         {
           '<leader>dB',
           function()
