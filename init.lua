@@ -1,3 +1,5 @@
+local is_git_repo = vim.fn.system('git rev-parse --is-inside-work-tree'):find 'true'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -386,7 +388,11 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>ff', builtin.git_files, { desc = 'Search tracked [F]iles' })
+      if is_git_repo then
+        vim.keymap.set('n', '<leader>ff', builtin.git_files, { desc = 'Search tracked [F]iles' })
+      else
+        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Search [F]iles' })
+      end
       vim.keymap.set('n', '<leader>fA', builtin.find_files, { desc = 'Search [A]ll files' })
       vim.keymap.set('n', '<leader>ss', function()
         builtin.builtin { include_extensions = true }
