@@ -25,7 +25,7 @@ return {
     build = 'make tiktoken',
     config = function()
       require('CopilotChat').setup {
-        window = { layout = 'replace' },
+        window = { layout = 'vertical' },
         mappings = {
           reset = {
             normal = '<leader>cr',
