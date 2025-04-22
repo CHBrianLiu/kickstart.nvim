@@ -168,6 +168,12 @@ vim.opt.foldlevel = 99
 -- This allows you to have a `.nvim.lua` file in your project root
 vim.opt.exrc = true
 
+-- [[ Configure Diagnostics ]]
+-- Add borders to diagnostic popups
+vim.diagnostic.config {
+  float = { border = 'rounded' },
+}
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
