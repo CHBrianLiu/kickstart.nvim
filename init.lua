@@ -73,6 +73,13 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Command-line completion behavior
+-- The tab key completes the longest common prefix and shows the matched options.
+-- Note that the tab key doens't iterate through the list. We need to use <c-n> and <c-p>
+-- for the purpose.
+-- To be able to iterate through options, change it to `longest:full,full`.
+vim.opt.wildmode = 'longest:full'
+
 -- statusline
 -- Let plugin handle the content of the statusline
 vim.opt.statusline = ''
