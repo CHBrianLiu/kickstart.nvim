@@ -78,7 +78,9 @@ vim.opt.scrolloff = 10
 -- Note that the tab key doens't iterate through the list. We need to use <c-n> and <c-p>
 -- for the purpose.
 -- To be able to iterate through options, change it to `longest:full,full`.
-vim.opt.wildmode = 'longest:full'
+vim.opt.wildmode = 'longest:full,full'
+-- Enable case-insensitive command-line completion
+vim.opt.wildignorecase = true
 
 -- statusline
 -- Let plugin handle the content of the statusline
