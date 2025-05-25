@@ -30,6 +30,21 @@ return {
         enable = false,
       },
       -- see below for full list of options 👇
+      mappings = {
+        -- Smart action depending on context, either follow link or toggle checkbox.
+        ['<cr>'] = {
+          action = function()
+            return require('obsidian').util.smart_action()
+          end,
+          opts = { buffer = true, expr = true },
+        },
+        -- List all notes
+        ['<leader>ff'] = {
+          action = function()
+            return require('obsidian').util
+          end,
+        },
+      },
     }
   end,
 }
