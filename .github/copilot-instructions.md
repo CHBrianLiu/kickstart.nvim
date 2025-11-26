@@ -42,6 +42,8 @@ Performance and UX
 - Defer heavy plugins; load on events or filetypes via lazy.nvim.
 - Keep startup time low and avoid unnecessary autocommands.
 - Make UI enhancements subtle; avoid noisy prompts or excessive virtual text.
+- When adding a new keymap that does not rely on any plugin, put it in after/plugin/keymaps.lua to keep init.lua aligned with upstream kickstart.nvim as much as 
+   possible.
 
 Extensibility
 - Encourage local overrides: user-specific settings should live outside VCS or behind conditionals.
