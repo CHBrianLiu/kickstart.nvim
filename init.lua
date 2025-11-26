@@ -955,6 +955,7 @@ require('lazy').setup({
     },
   },
 
+  --[[
   { -- You can easily change to a different colorscheme.
     -- Change the name of the colorscheme plugin below, and then
     -- change the command in the config to whatever the name of that colorscheme is.
@@ -976,6 +977,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+  --]]
 
   -- Highlight todo, notes, etc in comments
   {
