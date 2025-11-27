@@ -6,3 +6,4 @@ vim.keymap.set({ 'n', 'v', 'o' }, 'L', 'g_', { desc = 'Go to line end (non-blank
 -- BLiu: custom - personal keymaps loaded after core
 -- Map 'jk' in insert mode to escape
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
+
