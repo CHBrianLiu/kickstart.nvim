@@ -755,6 +755,7 @@ require('lazy').setup({
 
         uv = {},
         ty = {},
+        marksman = {}, -- Supports Markdown language server configuration for editing convenience
       }
 
       -- Ensure the servers and tools above are installed
