@@ -10,6 +10,7 @@ return {
   dependencies = {
     'MunifTanjim/nui.nvim', -- UI components
     'nvim-tree/nvim-web-devicons', -- icons (optional but recommended)
+    'nvim-telescope/telescope.nvim',
     -- Markdown rendering for rich responses
     { 'MeanderingProgrammer/render-markdown.nvim', opts = {} },
     -- GitHub Copilot backend (used as provider); disable inline suggestions so it
