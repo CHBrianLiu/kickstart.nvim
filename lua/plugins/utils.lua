@@ -1,5 +1,5 @@
 return {
-  { 'nvim-mini/mini.surround', version = false, opts = {} },
+  { 'tpope/vim-surround' },
   { 'nvim-mini/mini.pairs', version = false, opts = {} },
   { 'nvim-mini/mini.jump2d', version = false, opts = {} },
   {

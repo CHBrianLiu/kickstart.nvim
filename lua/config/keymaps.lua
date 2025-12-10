@@ -18,7 +18,7 @@ keymap('n', '<Esc>', '<cmd>nohlsearch<CR>')
 keymap('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 keymap('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 keymap('n', 'gl', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-keymap('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+keymap('n', '<leader>qq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -68,3 +68,20 @@ keymap({ 'n', 'v', 'o' }, 'L', '$', { desc = 'Move to end of line' })
 -- This makes cursor movement follow wrapped lines visually.
 keymap({ 'n', 'v', 'o' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = 'Move down by display line' })
 keymap({ 'n', 'v', 'o' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = 'Move up by display line' })
+
+-- Copy file path mappings
+keymap('n', '<leader>fp', function()
+  -- Copy relative path of current buffer to system clipboard
+  vim.fn.setreg('+', vim.fn.expand '%')
+  vim.notify 'Copied relative path to clipboard'
+end, { desc = 'Copy relative path of current buffer' })
+
+keymap('n', '<leader>fP', function()
+  -- Copy absolute path of current buffer to system clipboard
+  vim.fn.setreg('+', vim.fn.expand '%:p')
+  vim.notify 'Copied absolute path to clipboard'
+end, { desc = 'Copy absolute path of current buffer' })
+
+-- Close current split
+-- This mimic the command `:qa`
+keymap('n', '<leader>qa', '<cmd>close<cr>', { desc = 'Close current split' })

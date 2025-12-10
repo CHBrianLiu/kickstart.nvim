@@ -22,6 +22,7 @@ return {
         section_separators = '',
       },
     },
+    enabled = vim.g.have_nerd_font,
   },
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -80,15 +81,13 @@ return {
       end,
     },
   },
-
   {
-    'tpope/vim-fugitive',
-    -- Core Git wrapper for Vim/Neovim. No opts needed for basic usage.
-  },
-
-  {
-    'nvim-tree/nvim-web-devicons',
-    enabled = vim.g.have_nerd_font,
+    'Bekaboo/dropbar.nvim',
+    config = function()
+      local dropbar_api = require 'dropbar.api'
+      vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
+      vim.keymap.set('n', '[;', dropbar_api.goto_context_start, { desc = 'Go to start of current context' })
+      vim.keymap.set('n', '];', dropbar_api.select_next_context, { desc = 'Select next context' })
+    end,
   },
 }
-
