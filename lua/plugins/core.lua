@@ -81,7 +81,10 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
+      vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [c]ommands' })
+      vim.keymap.set('n', '<leader>fR', builtin.jumplist, { desc = '[S]earch [r]ecent locations' })
+      -- git related
+      vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search [g]it [b]ranch' })
       vim.keymap.set('n', '<leader>gh', require('telescope').extensions.git_file_history.git_file_history, { desc = 'Browse File History' })
 
       -- Slightly advanced example of overriding default behavior and theme
