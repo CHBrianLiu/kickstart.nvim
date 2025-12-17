@@ -90,4 +90,14 @@ return {
       vim.keymap.set('n', '];', dropbar_api.select_next_context, { desc = 'Select next context' })
     end,
   },
+  {
+    -- Make sure to set this up properly if you have lazy=true
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {
+      file_types = { 'markdown', 'Avante' },
+      -- this is copied from the sample config of 'azorng/goose.nvim'
+      anti_conceal = { enabled = false },
+    },
+    ft = { 'markdown', 'Avante', 'codecompanion' },
+  },
 }

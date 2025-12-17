@@ -17,4 +17,3 @@ require 'config.lazy'
 -- Load user-specific configuration if it exists
 -- This allows you to have a local configuration that is not committed to git
 pcall(require, 'user')
-
