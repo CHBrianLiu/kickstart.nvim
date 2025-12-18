@@ -200,8 +200,8 @@ return {
       -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
         preset = 'default',
-        -- i don't know why this doesn't work, so another keymap is set as workaround.
-        [',.'] = { 'show', 'show_documentation', 'hide_documentation' },
+        -- Sequential keys are defined in lazy.nvim keys schema below
+        -- [',.'] = { 'show', 'show_documentation', 'hide_documentation' },
         ['<C-,>'] = { 'show', 'show_documentation', 'hide_documentation' },
       },
       appearance = {
@@ -213,7 +213,7 @@ return {
       -- (Default) Only show the documentation popup when manually triggered
       completion = {
         documentation = {
-          auto_show = false,
+          auto_show = true,
         },
         list = {
           selection = {
@@ -234,8 +234,26 @@ return {
       --
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = 'prefer_rust_with_warning' },
+      signature = {
+        enabled = true,
+        window = {
+          show_documentation = true,
+        },
+      },
+
+      cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = { menu = { auto_show = true } },
+      },
     },
     opts_extend = { 'sources.default' },
+    keys = {
+      {
+        ',.',
+        function() require('blink.cmp').show() end,
+        mode = 'i',
+      },
+    },
   },
 
   -- LSP Configuration & Plugins
