@@ -78,3 +78,5 @@ vim.opt.foldlevel = 99 -- Start with all folds open
 
 -- Global statusline instead of jumping from window to winow
 vim.opt.laststatus = 3
+
+vim.o.winborder = 'rounded'
