@@ -119,4 +119,18 @@ return {
     event = 'VeryLazy',
     opts = {},
   },
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
+  {
+    'lukas-reineke/virt-column.nvim',
+    opts = {
+      virtcolumn = '80,120',
+      -- char = '│',
+    },
+  },
 }
