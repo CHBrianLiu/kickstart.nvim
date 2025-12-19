@@ -13,7 +13,16 @@ return {
         },
       },
     },
-    init = function() vim.cmd.colorscheme 'nightfox' end,
+    config = function(_, opts)
+      require('nightfox').setup(opts)
+
+      local colorscheme = 'nordfox'
+      vim.cmd.colorscheme(colorscheme)
+
+      -- use alternative color for the window separaters
+      local palette = require('nightfox.palette').load(colorscheme)
+      vim.cmd('highlight! WinSeparator guifg=' .. palette.blue.base .. ' guibg=NONE')
+    end,
   },
 
   { -- Set lualine as statusline
@@ -21,7 +30,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        theme = 'nightfox',
+        theme = 'nordfox',
         component_separators = '|',
         section_separators = '',
       },
