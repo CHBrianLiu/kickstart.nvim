@@ -1,15 +1,19 @@
 return {
   {
-    'ellisonleao/gruvbox.nvim',
+    'EdenEast/nightfox.nvim',
     priority = 1000,
     opts = {
-      transparent_mode = false,
-      terminal_colors = true,
+      options = {
+        transparent = false,
+        terminal_colors = true,
+        dim_inactive = false,
+        styles = {
+          comments = 'italic',
+          keywords = 'bold',
+        },
+      },
     },
-    init = function()
-      vim.o.background = 'light'
-      vim.cmd.colorscheme 'gruvbox'
-    end,
+    init = function() vim.cmd.colorscheme 'nightfox' end,
   },
 
   { -- Set lualine as statusline
@@ -17,7 +21,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        theme = 'gruvbox',
+        theme = 'nightfox',
         component_separators = '|',
         section_separators = '',
       },
