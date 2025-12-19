@@ -100,4 +100,10 @@ return {
     },
     ft = { 'markdown', 'Avante', 'codecompanion' },
   },
+  -- Marks visualization
+  {
+    'chentoast/marks.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
 }
