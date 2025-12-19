@@ -1,7 +1,18 @@
 return {
   {
     'tpope/vim-fugitive',
-    -- Core Git wrapper for Vim/Neovim. No opts needed for basic usage.
+    keys = {
+      {
+        '<leader>gfa',
+        '<cmd>G fetch --all<CR>',
+        desc = 'Git fetch all',
+      },
+      {
+        '<leader>gpra',
+        '<cmd>G pull --autostash --rebase<CR>',
+        desc = 'Git pull with autostash and rebase',
+      },
+    },
   },
   {
     'linrongbin16/gitlinker.nvim',
