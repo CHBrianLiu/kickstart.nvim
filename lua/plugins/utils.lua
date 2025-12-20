@@ -1,7 +1,6 @@
 return {
   { 'tpope/vim-surround' },
   { 'nvim-mini/mini.pairs', version = false, opts = {} },
-  { 'nvim-mini/mini.jump2d', version = false, opts = {} },
   {
     'nvim-mini/mini.sessions',
     version = false,
@@ -11,6 +10,14 @@ return {
 
       -- Whether to write currently read session before leaving it
       autowrite = true,
+    },
+  },
+  -- Jump to anywhere
+  {
+    'https://codeberg.org/andyg/leap.nvim.git',
+    keys = {
+      { 's', '<Plug>(leap)', mode = { 'n', 'x', 'o' } },
+      { 'S', '<Plug>(leap-from-window)', mode = { 'n', 'x', 'o' } },
     },
   },
 }
