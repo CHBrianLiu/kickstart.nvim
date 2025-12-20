@@ -12,6 +12,14 @@ return {
           keywords = 'bold',
         },
       },
+      specs = {
+        nordfox = {
+          syntax = {
+            -- The original color is a little bit hard to find.
+            comment = 'white.dim',
+          },
+        },
+      },
     },
     config = function(_, opts)
       require('nightfox').setup(opts)
