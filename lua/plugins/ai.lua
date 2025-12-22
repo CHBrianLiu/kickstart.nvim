@@ -147,81 +147,111 @@ return {
   --     },
   --   },
   -- },
-  -- {
-  --   'olimorris/codecompanion.nvim',
-  --   version = '^18.0.0',
-  --   opts = {},
-  --   keys = {
-  --     {
-  --       '<leader>a<space>',
-  --       '<cmd>CodeCompanionActions<cr>',
-  --       mode = { 'n', 'v' },
-  --       silent = true,
-  --     },
-  --     {
-  --       '<leader>aa',
-  --       '<cmd>CodeCompanionChat Toggle<cr>',
-  --       mode = { 'n', 'v' },
-  --       noremap = true,
-  --       silent = true,
-  --     },
-  --     {
-  --       'ga',
-  --       '<cmd>CodeCompanionChat Add<cr>',
-  --       mode = { 'v' },
-  --       noremap = true,
-  --       silent = true,
-  --     },
-  --   },
-  --   dependencies = {
-  --     'nvim-lua/plenary.nvim',
-  --     'nvim-treesitter/nvim-treesitter',
-  --   },
-  -- },
   {
-    'azorng/goose.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'MeanderingProgrammer/render-markdown.nvim',
-    },
+    'olimorris/codecompanion.nvim',
+    version = '^18.0.0',
     opts = {
-      prefered_picker = 'telescope',
-      default_global_keymaps = false,
-      keymap = {
-        global = {
-          toggle_focus = '<leader>at', -- Toggle focus between goose and last window
-          close = '<leader>gq', -- Close UI windows
-          toggle_fullscreen = '<leader>gf', -- Toggle between normal and fullscreen mode
-          select_session = '<leader>gs', -- Select and load a goose session
-          goose_mode_chat = '<leader>gmc', -- Set goose mode to `chat`. (Tool calling disabled. No editor context besides selections)
-          goose_mode_auto = '<leader>gma', -- Set goose mode to `auto`. (Default mode with full agent capabilities)
-          configure_provider = '<leader>gp', -- Quick provider and model switch from predefined list
-          open_config = '<leader>g.', -- Open goose config file
-          inspect_session = '<leader>g?', -- Inspect current session as JSON
-          diff_open = '<leader>gd', -- Opens a diff tab of a modified file since the last goose prompt
-          diff_next = '<leader>g]', -- Navigate to next file diff
-          diff_prev = '<leader>g[', -- Navigate to previous file diff
-          diff_close = '<leader>gc', -- Close diff view tab and return to normal editing
-          diff_revert_all = '<leader>gra', -- Revert all file changes since the last goose prompt
-          diff_revert_this = '<leader>grt', -- Revert current file changes since the last goose prompt
-        },
-        window = {
-          submit_insert = '<C-r>',
+      extensions = {
+        history = {
+          enabled = true,
+          opts = {
+            title_generation_opts = {
+              ---Adapter for generating titles (defaults to current chat adapter)
+              adapter = 'copilot',
+              ---Model for generating titles (defaults to current chat model)
+              model = 'gpt-5-mini',
+            },
+          },
         },
       },
-      ui = {
-        window_type = 'split',
+      interactions = {
+        background = {
+          chat = {
+            opts = {
+              enabled = true,
+            },
+          },
+        },
+        chat = {
+          adapter = {
+            type = 'acp',
+            name = 'goose',
+          },
+        },
       },
-      system_instructions = 'Refer to .github/copilot-instructions.md.',
     },
     keys = {
-      { '<leader>aa', '<cmd>Goose<cr>' },
-      { '<leader>an', '<cmd>GooseOpenInputNewSession<cr>' },
-      { '<leader>a?', '<cmd>GooseConfigureProvider<cr>' },
-      { '<leader>ap', '<cmd>GooseOpenConfig<cr>' },
-      { '<leader>as', '<cmd>GooseSelectSession<cr>' },
-      { '<leader>amc', '<cmd>GooseModeChat<cr>' },
-      { '<leader>ama', '<cmd>GooseModeAuto<cr>' },
+      {
+        '<leader>a<space>',
+        '<cmd>CodeCompanionActions<cr>',
+        mode = { 'n', 'v' },
+        silent = true,
+      },
+      {
+        '<leader>aa',
+        '<cmd>CodeCompanionChat Toggle<cr>',
+        mode = { 'n', 'v' },
+        noremap = true,
+        silent = true,
+      },
+      {
+        'ga',
+        '<cmd>CodeCompanionChat Add<cr>',
+        mode = { 'v' },
+        noremap = true,
+        silent = true,
+      },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'ravitemer/codecompanion-history.nvim',
     },
   },
+  -- {
+  --   'azorng/goose.nvim',
+  --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
+  --     'MeanderingProgrammer/render-markdown.nvim',
+  --   },
+  --   opts = {
+  --     prefered_picker = 'telescope',
+  --     default_global_keymaps = false,
+  --     keymap = {
+  --       global = {
+  --         toggle_focus = '<leader>at', -- Toggle focus between goose and last window
+  --         close = '<leader>gq', -- Close UI windows
+  --         toggle_fullscreen = '<leader>gf', -- Toggle between normal and fullscreen mode
+  --         select_session = '<leader>gs', -- Select and load a goose session
+  --         goose_mode_chat = '<leader>gmc', -- Set goose mode to `chat`. (Tool calling disabled. No editor context besides selections)
+  --         goose_mode_auto = '<leader>gma', -- Set goose mode to `auto`. (Default mode with full agent capabilities)
+  --         configure_provider = '<leader>gp', -- Quick provider and model switch from predefined list
+  --         open_config = '<leader>g.', -- Open goose config file
+  --         inspect_session = '<leader>g?', -- Inspect current session as JSON
+  --         diff_open = '<leader>gd', -- Opens a diff tab of a modified file since the last goose prompt
+  --         diff_next = '<leader>g]', -- Navigate to next file diff
+  --         diff_prev = '<leader>g[', -- Navigate to previous file diff
+  --         diff_close = '<leader>gc', -- Close diff view tab and return to normal editing
+  --         diff_revert_all = '<leader>gra', -- Revert all file changes since the last goose prompt
+  --         diff_revert_this = '<leader>grt', -- Revert current file changes since the last goose prompt
+  --       },
+  --       window = {
+  --         submit_insert = '<C-r>',
+  --       },
+  --     },
+  --     ui = {
+  --       window_type = 'split',
+  --     },
+  --     system_instructions = 'Refer to .github/copilot-instructions.md.',
+  --   },
+  --   keys = {
+  --     { '<leader>aa', '<cmd>Goose<cr>' },
+  --     { '<leader>an', '<cmd>GooseOpenInputNewSession<cr>' },
+  --     { '<leader>a?', '<cmd>GooseConfigureProvider<cr>' },
+  --     { '<leader>ap', '<cmd>GooseOpenConfig<cr>' },
+  --     { '<leader>as', '<cmd>GooseSelectSession<cr>' },
+  --     { '<leader>amc', '<cmd>GooseModeChat<cr>' },
+  --     { '<leader>ama', '<cmd>GooseModeAuto<cr>' },
+  --   },
+  -- },
 }

@@ -115,7 +115,7 @@ return {
     -- Make sure to set this up properly if you have lazy=true
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {
-      file_types = { 'markdown', 'Avante' },
+      file_types = { 'markdown', 'Avante', 'codecompanion' },
       -- this is copied from the sample config of 'azorng/goose.nvim'
       anti_conceal = { enabled = false },
     },
