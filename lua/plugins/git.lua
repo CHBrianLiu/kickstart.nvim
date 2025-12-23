@@ -1,16 +1,23 @@
 return {
   {
     'tpope/vim-fugitive',
+    config = function()
+      vim.api.nvim_create_user_command('Gfa', 'G fetch --all', {})
+      vim.api.nvim_create_user_command('Gpra', 'G pull --autostash --rebase', {})
+      vim.api.nvim_create_user_command('Gc', 'G commit', {})
+      vim.api.nvim_create_user_command('Gcb', 'G checkout -b <args>', { nargs = 1 })
+      vim.api.nvim_create_user_command('Glol', 'G log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"', {})
+      vim.api.nvim_create_user_command('Grb', 'G rebase', {})
+      vim.api.nvim_create_user_command('Grba', 'G rebase --abort', {})
+      vim.api.nvim_create_user_command('Grbc', 'G rebase --continue', {})
+      vim.api.nvim_create_user_command('Grbi', 'G rebase --interactive', {})
+      vim.api.nvim_create_user_command('Gtsc', 'G tag --sort=-creatordate', {})
+    end,
     keys = {
       {
-        '<leader>gfa',
-        '<cmd>G fetch --all<CR>',
-        desc = 'Git fetch all',
-      },
-      {
-        '<leader>gpra',
-        '<cmd>G pull --autostash --rebase<CR>',
-        desc = 'Git pull with autostash and rebase',
+        '<leader>gB',
+        '<cmd>G blame<CR>',
+        desc = 'Toggle Git blame panel',
       },
     },
   },
