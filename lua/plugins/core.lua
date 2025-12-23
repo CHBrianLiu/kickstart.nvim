@@ -67,6 +67,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'git_file_history')
+      pcall(require('telescope').load_extension, 'yank_history')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -85,6 +86,7 @@ return {
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [c]ommands' })
       vim.keymap.set('n', '<leader>fR', builtin.jumplist, { desc = '[S]earch [r]ecent locations' })
       vim.keymap.set('n', "<leader>'", builtin.marks, { desc = '[S]earch marks, like the way you jump.' })
+      vim.keymap.set('n', '<leader>sy', require('telescope').extensions.yank_history.yank_history, { desc = '[S]earch [y]ank history.' })
       -- git related
       vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search [g]it [b]ranch' })
       vim.keymap.set('n', '<leader>gh', require('telescope').extensions.git_file_history.git_file_history, { desc = 'Browse File History' })

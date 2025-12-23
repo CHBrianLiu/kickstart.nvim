@@ -20,4 +20,19 @@ return {
       { 'S', '<Plug>(leap-from-window)', mode = { 'n', 'x', 'o' } },
     },
   },
+  {
+    'gbprod/yanky.nvim',
+    opts = {
+      preserve_cursor_position = {
+        enabled = true,
+      },
+    },
+    keys = {
+      { 'y', '<Plug>(YankyYank)', mode = { 'n', 'x' }, desc = 'Yank text' },
+      { 'p', '<Plug>(YankyPutAfter)', mode = { 'n', 'x' }, desc = 'Put yanked text after cursor' },
+      { 'P', '<Plug>(YankyPutBefore)', mode = { 'n', 'x' }, desc = 'Put yanked text before cursor' },
+      { 'gp', '<Plug>(YankyGPutAfter)', mode = { 'n', 'x' }, desc = 'Put yanked text after selection' },
+      { 'gP', '<Plug>(YankyGPutBefore)', mode = { 'n', 'x' }, desc = 'Put yanked text before selection' },
+    },
+  },
 }
