@@ -2,9 +2,25 @@ return {
   'stevearc/oil.nvim',
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
+  opts = {
+    keymaps = {
+      ['<leader>/'] = {
+        callback = function()
+          local oil = require 'oil'
+          local telescope = require 'telescope.builtin'
+          local current_dir = oil.get_current_dir()
+          telescope.live_grep { cwd = current_dir }
+        end,
+        mode = 'n',
+        desc = 'Live grep from Oil dir',
+      },
+    },
+  },
   -- Optional dependencies
-  dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
+  dependencies = {
+    { 'nvim-mini/mini.icons', opts = {} },
+    'nvim-telescope/telescope.nvim',
+  },
   -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
   -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
   lazy = false,

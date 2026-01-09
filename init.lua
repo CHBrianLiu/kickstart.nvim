@@ -14,6 +14,9 @@ require 'config.autocmds'
 -- Bootstrap lazy.nvim and load plugins
 require 'config.lazy'
 
+-- Load snippets
+require 'config.snippets'
+
 -- Load user-specific configuration if it exists
 -- This allows you to have a local configuration that is not committed to git
 pcall(require, 'user')
