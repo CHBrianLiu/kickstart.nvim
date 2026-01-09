@@ -97,7 +97,7 @@ return {
       vim.keymap.set('n', "<leader>'", builtin.marks, { desc = '[S]earch marks, like the way you jump.' })
       vim.keymap.set('n', '<leader>sy', require('telescope').extensions.yank_history.yank_history, { desc = '[S]earch [y]ank history.' })
       -- git related
-      vim.keymap.set('n', '<leader>gb', builtin.git_branches, { desc = 'Search [g]it [b]ranch' })
+      vim.keymap.set('n', '<leader>gB', builtin.git_branches, { desc = 'Search [g]it [b]ranch' })
       vim.keymap.set('n', '<leader>gh', require('telescope').extensions.git_file_history.git_file_history, { desc = 'Browse File History' })
 
       -- Slightly advanced example of overriding default behavior and theme

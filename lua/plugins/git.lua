@@ -33,7 +33,7 @@ return {
     end,
     keys = {
       {
-        '<leader>gB',
+        '<leader>gb',
         '<cmd>G blame<CR>',
         desc = 'Toggle Git blame panel',
       },
