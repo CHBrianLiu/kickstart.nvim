@@ -23,6 +23,13 @@ return {
       end, { desc = 'Push and set upstream to current branch' })
 
       vim.api.nvim_create_user_command('GpF', 'G push --force', { desc = 'Force push' })
+
+      -- Fix line mismatch between blame window and source window when winbar is present
+      -- We need this because the top line of each editor window is the breadcrumb.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'fugitiveblame',
+        callback = function() vim.wo.winbar = ' ' end,
+      })
     end,
     keys = {
       {
