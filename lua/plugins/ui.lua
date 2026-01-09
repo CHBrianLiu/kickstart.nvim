@@ -116,8 +116,6 @@ return {
     'MeanderingProgrammer/render-markdown.nvim',
     opts = {
       file_types = { 'markdown', 'Avante', 'codecompanion' },
-      -- this is copied from the sample config of 'azorng/goose.nvim'
-      anti_conceal = { enabled = false },
     },
     ft = { 'markdown', 'Avante', 'codecompanion' },
   },
