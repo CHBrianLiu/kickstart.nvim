@@ -90,15 +90,12 @@ return {
         map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
         map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
         map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-        map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
         map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
         map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
         map('n', '<leader>hb', function() gitsigns.blame_line { full = true } end, { desc = 'git [b]lame line' })
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[t]oggle git [b]lame line' })
         map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
         map('n', '<leader>hD', function() gitsigns.diffthis '@' end, { desc = 'git [D]iff against last commit' })
-        -- Toggles
-        map('n', '<leader>td', gitsigns.toggle_deleted, { desc = '[t]oggle git show [d]eleted' })
       end,
     },
   },
@@ -137,6 +134,27 @@ return {
     opts = {
       virtcolumn = '80,120',
       -- char = '│',
+    },
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    opts = {
+      preview = {
+        should_preview_cb = function(bufnr, qwinid)
+          local ret = true
+          local bufname = vim.api.nvim_buf_get_name(bufnr)
+          local fsize = vim.fn.getfsize(bufname)
+          if fsize > 100 * 1024 then
+            -- skip file size greater than 100k
+            ret = false
+          elseif bufname:match '^fugitive://' then
+            -- skip fugitive buffer
+            ret = false
+          end
+          return ret
+        end,
+      },
     },
   },
 }
