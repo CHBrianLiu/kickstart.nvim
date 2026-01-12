@@ -9,6 +9,7 @@ return {
           local oil = require 'oil'
           local telescope = require 'telescope.builtin'
           local current_dir = oil.get_current_dir()
+          oil.close()
           telescope.live_grep { cwd = current_dir }
         end,
         mode = 'n',
