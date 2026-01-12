@@ -7,6 +7,7 @@ return {
       vim.api.nvim_create_user_command('Gc', 'G commit', {})
       vim.api.nvim_create_user_command('Gcb', 'G checkout -b <args>', { nargs = 1 })
       vim.api.nvim_create_user_command('Glol', 'G log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"', {})
+      vim.api.nvim_create_user_command('Glod', 'G log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset"', {})
       vim.api.nvim_create_user_command('Grb', 'G rebase <args>', { nargs = 1 })
       vim.api.nvim_create_user_command('Grba', 'G rebase --abort', {})
       vim.api.nvim_create_user_command('Grbc', 'G rebase --continue', {})
@@ -46,14 +47,6 @@ return {
     keys = {
       { '<leader>gl', '<cmd>GitLink<cr>', mode = { 'n', 'v' }, desc = 'Yank git link' },
       { '<leader>go', '<cmd>GitLink!<cr>', mode = { 'n', 'v' }, desc = 'Open git link' },
-    },
-  },
-
-  {
-    'isak102/telescope-git-file-history.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'tpope/vim-fugitive',
     },
   },
   {

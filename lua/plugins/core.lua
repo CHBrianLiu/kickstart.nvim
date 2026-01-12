@@ -20,9 +20,6 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-
-      -- Also see git.lua
-      'isak102/telescope-git-file-history.nvim',
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -74,7 +71,6 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'git_file_history')
       pcall(require('telescope').load_extension, 'yank_history')
 
       -- See `:help telescope.builtin`
@@ -87,6 +83,7 @@ return {
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
       vim.keymap.set('n', '<leader>sd', function() builtin.diagnostics { bufnr = 0 } end, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sD', builtin.diagnostics, { desc = '[S]earch workspace [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
@@ -98,16 +95,69 @@ return {
       vim.keymap.set('n', '<leader>sy', require('telescope').extensions.yank_history.yank_history, { desc = '[S]earch [y]ank history.' })
       -- git related
       vim.keymap.set('n', '<leader>gB', builtin.git_branches, { desc = 'Search [g]it [b]ranch' })
-      vim.keymap.set('n', '<leader>gh', require('telescope').extensions.git_file_history.git_file_history, { desc = 'Browse File History' })
+      -- git tags
+      vim.keymap.set('n', '<leader>gt', function()
+        -- Use custom picker to support sorting by creation date
+        local actions = require 'telescope.actions'
+        local action_state = require 'telescope.actions.state'
+        local pickers = require 'telescope.pickers'
+        local finders = require 'telescope.finders'
+        local conf = require('telescope.config').values
 
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily search in current buffer' })
+        pickers
+          .new({}, {
+            prompt_title = 'Git Tags',
+            finder = finders.new_oneshot_job({ 'git', 'tag', '--sort=-creatordate' }, {}),
+            sorter = conf.generic_sorter {},
+            attach_mappings = function(prompt_bufnr, map)
+              actions.select_default:replace(function()
+                actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                  vim.cmd('git checkout ' .. selection[1])
+                end
+              end)
+
+              local function delete_local_tag(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                  local tag = selection[1]
+                  vim.cmd('!git tag -d ' .. tag)
+                  print('Deleted local tag: ' .. tag)
+                  local current_picker = action_state.get_current_picker(prompt_bufnr)
+                  current_picker:refresh(finders.new_oneshot_job({ 'git', 'tag', '--sort=-creatordate' }, {}), { reset_prompt = true })
+                end
+              end
+
+              local function delete_remote_tag(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                  local tag = selection[1]
+                  vim.cmd('!git push origin --delete ' .. tag)
+                  print('Deleted remote tag: ' .. tag)
+                  local current_picker = action_state.get_current_picker(prompt_bufnr)
+                  current_picker:refresh(finders.new_oneshot_job({ 'git', 'tag', '--sort=-creatordate' }, {}), { reset_prompt = true })
+                end
+              end
+
+              local function yank_tag(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                  local tag = selection[1]
+                  vim.fn.setreg('+', tag)
+                  print('Yanked tag to clipboard: ' .. tag)
+                end
+              end
+
+              map('n', 'dd', delete_local_tag, { desc = 'Delete local tag' })
+              map('n', 'DD', delete_remote_tag, { desc = 'Delete remote tag' })
+              map('n', 'yy', yank_tag, { desc = 'Yank tag to clipboard' })
+
+              return true
+            end,
+          })
+          :find()
+      end, { desc = 'Search [g]it [t]ags' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
