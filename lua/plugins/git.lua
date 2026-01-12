@@ -39,6 +39,7 @@ return {
         desc = 'Toggle Git blame panel',
       },
     },
+    lazy = false,
   },
   {
     'linrongbin16/gitlinker.nvim',
