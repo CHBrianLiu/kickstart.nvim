@@ -53,6 +53,8 @@ keymap('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
 
 -- Better indenting
 keymap('i', 'jk', '<Esc>', { desc = 'Easy escape from insert mode' })
+keymap('i', 'JK', '<Esc>', { desc = 'Easy escape from insert mode' })
+keymap('i', 'Jk', '<Esc>', { desc = 'Easy escape from insert mode' })
 
 keymap('v', '<', '<gv')
 keymap('v', '>', '>gv')
