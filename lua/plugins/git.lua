@@ -31,6 +31,8 @@ return {
         pattern = 'fugitiveblame',
         callback = function() vim.wo.winbar = ' ' end,
       })
+
+      vim.g.fugitive_summary_format = '(%ci) %s'
     end,
     keys = {
       {
