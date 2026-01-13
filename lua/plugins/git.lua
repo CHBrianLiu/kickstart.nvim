@@ -40,6 +40,11 @@ return {
         '<cmd>G blame<CR>',
         desc = 'Toggle Git blame panel',
       },
+      {
+        '<leader>gh',
+        '<cmd>0Gllog!<CR>',
+        desc = 'View Git history of the file.',
+      },
     },
     lazy = false,
   },
