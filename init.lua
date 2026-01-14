@@ -9,6 +9,7 @@
 -- fdsfsd
 require 'config.options'
 require 'config.keymaps'
+require 'config.commands'
 require 'config.autocmds'
 
 -- Bootstrap lazy.nvim and load plugins
