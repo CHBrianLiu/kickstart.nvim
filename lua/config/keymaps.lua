@@ -74,14 +74,16 @@ keymap({ 'n', 'v', 'o' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, desc 
 -- Copy file path mappings
 keymap('n', '<leader>fp', function()
   -- Copy relative path of current buffer to system clipboard
-  vim.fn.setreg('+', vim.fn.expand '%')
-  vim.notify 'Copied relative path to clipboard'
+  local path = vim.fn.expand '%'
+  vim.fn.setreg('+', path)
+  vim.notify('Copied relative path to clipboard: ' .. path)
 end, { desc = 'Copy relative path of current buffer' })
 
 keymap('n', '<leader>fP', function()
   -- Copy absolute path of current buffer to system clipboard
-  vim.fn.setreg('+', vim.fn.expand '%:p')
-  vim.notify 'Copied absolute path to clipboard'
+  local path = vim.fn.expand '%:p'
+  vim.fn.setreg('+', path)
+  vim.notify('Copied absolute path to clipboard: ' .. path)
 end, { desc = 'Copy absolute path of current buffer' })
 
 -- Close current split
