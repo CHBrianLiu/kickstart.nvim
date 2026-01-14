@@ -114,7 +114,7 @@ return {
                 actions.close(prompt_bufnr)
                 local selection = action_state.get_selected_entry()
                 if selection then
-                  vim.cmd('git checkout ' .. selection[1])
+                  vim.cmd('!git checkout ' .. selection[1])
                 end
               end)
 
