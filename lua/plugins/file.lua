@@ -15,6 +15,16 @@ return {
         mode = 'n',
         desc = 'Live grep from Oil dir',
       },
+      ['<leader>gh'] = {
+        callback = function()
+          local oil = require 'oil'
+          local current_dir = oil.get_current_dir()
+          oil.close()
+          vim.cmd('Gclog! -- ' .. current_dir)
+        end,
+        mode = 'n',
+        desc = 'Git log (Gclog) of dir',
+      },
     },
   },
   -- Optional dependencies
