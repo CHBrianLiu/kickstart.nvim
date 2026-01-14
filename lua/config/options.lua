@@ -8,7 +8,7 @@ vim.opt.hlsearch = true
 -- Make line numbers default
 vim.opt.number = true
 -- Relative line numbers help with jumping
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
