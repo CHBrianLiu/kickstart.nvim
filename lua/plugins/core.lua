@@ -79,6 +79,21 @@ return {
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', function() builtin.find_files { hidden = true, no_ignore = true } end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ff', function() builtin.find_files { hidden = false, no_ignore = false } end, { desc = '[S]earch [f]iles' })
+      -- Visual mode: Use the selected text as the default search text for Telescope.
+      -- Implementation details:
+      -- There is no direct "get_selected_text" API in Neovim that handles all visual modes (v, V, <C-v>) easily.
+      -- The most robust method is to:
+      -- 1. Save the content of a specific register (v).
+      -- 2. Yank the current selection into that register.
+      -- 3. Read the register's content.
+      -- 4. Restore the register's original content.
+      vim.keymap.set('v', '<leader>ff', function()
+        local saved_reg = vim.fn.getreg 'v'
+        vim.cmd 'noau normal! "vy"'
+        local text = vim.fn.getreg 'v'
+        vim.fn.setreg('v', saved_reg)
+        builtin.find_files { default_text = text }
+      end, { desc = '[S]earch [f]iles with selection' })
       vim.keymap.set('n', '<leader>fF', function() builtin.find_files { hidden = true, no_ignore = true } end, { desc = '[S]earch all [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
@@ -90,6 +105,7 @@ return {
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [c]ommands' })
+      vim.keymap.set('n', '<leader>sC', builtin.command_history, { desc = '[S]earch [C]ommand history' })
       vim.keymap.set('n', '<leader>fR', builtin.jumplist, { desc = '[S]earch [r]ecent locations' })
       vim.keymap.set('n', "<leader>'", builtin.marks, { desc = '[S]earch marks, like the way you jump.' })
       vim.keymap.set('n', '<leader>sy', require('telescope').extensions.yank_history.yank_history, { desc = '[S]earch [y]ank history.' })
