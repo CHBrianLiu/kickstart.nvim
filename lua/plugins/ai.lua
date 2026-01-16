@@ -4,78 +4,50 @@ return {
 
   -- OpenCode AI assistant integration
   {
-    'NickvanDyke/opencode.nvim',
+    'sudo-tee/opencode.nvim',
     dependencies = {
-      { 'folke/snacks.nvim', opts = { input = {}, picker = {}, terminal = {} } },
+      'nvim-lua/plenary.nvim',
+      'MeanderingProgrammer/render-markdown.nvim',
+      'saghen/blink.cmp',
+      'folke/snacks.nvim',
+      'nvim-telescope/telescope.nvim',
     },
-    keys = {
-      -- Core actions
-      {
-        '<leader>aa',
-        function() require('opencode').ask('@this: ', { submit = true }) end,
-        mode = { 'n', 'x' },
-        desc = 'Ask OpenCode with context',
-      },
-      {
-        '<leader>aA',
-        function() require('opencode').ask '' end,
-        mode = { 'n', 'x' },
-        desc = 'Ask OpenCode',
-      },
-      {
-        '<leader>as',
-        function() require('opencode').select() end,
-        mode = { 'n', 'x' },
-        desc = 'Select OpenCode action',
-      },
-      {
-        '<leader>at',
-        function() require('opencode').toggle() end,
-        mode = { 'n', 't' },
-        desc = 'Toggle OpenCode',
-      },
+    opts = {
+      preferred_picker = 'telescope',
+      default_global_keymaps = false, -- Disable defaults to use custom <leader>a
 
-      -- Operator mode
-      {
-        '<leader>ao',
-        function() return require('opencode').operator '@this ' end,
-        mode = { 'n', 'x' },
-        expr = true,
-        desc = 'Add range to OpenCode',
-      },
-      {
-        '<leader>aO',
-        function() return require('opencode').operator '@this ' .. '_' end,
-        mode = 'n',
-        expr = true,
-        desc = 'Add line to OpenCode',
-      },
-
-      -- Scroll OpenCode output
-      {
-        '<leader>au',
-        function() require('opencode').command 'session.half.page.up' end,
-        desc = 'OpenCode scroll up',
-      },
-      {
-        '<leader>ad',
-        function() require('opencode').command 'session.half.page.down' end,
-        desc = 'OpenCode scroll down',
-      },
-    },
-    config = function()
-      -- Configuration
-      vim.g.opencode_opts = {
-        provider = {
-          enabled = 'tmux',
-          tmux = {
-            options = '-h', -- Horizontal split
-          },
+      -- We use opts.keymap instead of lazy.nvim's 'keys' because opencode.nvim
+      -- manages context-aware keymaps (e.g., specific keys for the input window
+      -- vs. global editor keys) that are difficult to replicate with standard
+      -- lazy loading triggers.
+      keymap = {
+        editor = {
+          ['<leader>aa'] = { 'toggle', desc = 'Opencode: Toggle' },
+          ['<leader>ai'] = { 'open_input', desc = 'Opencode: Open Input' },
+          ['<leader>aI'] = { 'open_input_new_session', desc = 'Opencode: Open Input (New Session)' },
+          ['<leader>ao'] = { 'open_output', desc = 'Opencode: Open Output' },
+          ['<leader>at'] = { 'toggle_focus', desc = 'Opencode: Toggle Focus' },
+          ['<leader>aT'] = { 'timeline', desc = 'Opencode: Timeline' },
+          ['<leader>aq'] = { 'close', desc = 'Opencode: Close' },
+          ['<leader>as'] = { 'select_session', desc = 'Opencode: Select Session' },
+          ['<leader>aR'] = { 'rename_session', desc = 'Opencode: Rename Session' },
+          ['<leader>ap'] = { 'configure_provider', desc = 'Opencode: Configure Provider' },
+          ['<leader>az'] = { 'toggle_zoom', desc = 'Opencode: Toggle Zoom' },
+          ['<leader>av'] = { 'paste_image', desc = 'Opencode: Paste Image' },
+          ['<leader>ad'] = { 'diff_open', desc = 'Opencode: Diff Open' },
+          ['<leader>a]'] = { 'diff_next', desc = 'Opencode: Diff Next' },
+          ['<leader>a['] = { 'diff_prev', desc = 'Opencode: Diff Prev' },
+          ['<leader>ac'] = { 'diff_close', desc = 'Opencode: Diff Close' },
+          ['<leader>ax'] = { 'swap_position', desc = 'Opencode: Swap Position' },
+          ['<leader>a/'] = { 'quick_chat', mode = { 'n', 'x' }, desc = 'Opencode: Quick Chat' },
         },
-      }
-
-      -- Required for auto-reload
-      vim.o.autoread = true
-    end,
+        input_window = {
+          -- Only submit on <CR> when it's in normal mode.
+          ['<CR>'] = { 'submit_input_prompt', mode = 'n' },
+          -- Switch modes like in CLI
+          ['<tab>'] = { 'switch_mode', mode = 'n' },
+        },
+      },
+    },
   },
 }
