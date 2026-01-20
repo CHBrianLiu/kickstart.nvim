@@ -25,6 +25,35 @@ return {
         mode = 'n',
         desc = 'Git log (Gclog) of dir',
       },
+      ['<leader>fp'] = {
+        callback = function()
+          local oil = require 'oil'
+          local entry = oil.get_cursor_entry()
+          if entry then
+            local dir = oil.get_current_dir()
+            local path = dir .. entry.name
+            local rel_path = vim.fn.fnamemodify(path, ':.')
+            vim.fn.setreg('+', rel_path)
+            vim.notify('Copied relative path: ' .. rel_path)
+          end
+        end,
+        mode = 'n',
+        desc = 'Copy relative path',
+      },
+      ['<leader>fP'] = {
+        callback = function()
+          local oil = require 'oil'
+          local entry = oil.get_cursor_entry()
+          if entry then
+            local dir = oil.get_current_dir()
+            local path = dir .. entry.name
+            vim.fn.setreg('+', path)
+            vim.notify('Copied absolute path: ' .. path)
+          end
+        end,
+        mode = 'n',
+        desc = 'Copy absolute path',
+      },
     },
   },
   -- Optional dependencies
