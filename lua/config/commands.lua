@@ -40,3 +40,11 @@ vim.api.nvim_create_user_command('Jira', function(opts)
     print 'No Jira ticket ID found'
   end
 end, { desc = 'Open Jira ticket from the cursor word' })
+
+-- CI Watch integration
+-- This requires the script to be in PATH.
+-- Find the script in my note.
+vim.api.nvim_create_user_command('CIWatch', function()
+  vim.fn.jobstart({ 'ci_watch.sh' }, { detach = true })
+  vim.notify 'Started watching CI pipelines...'
+end, { desc = 'Watch GitHub CI status for current commit' })
