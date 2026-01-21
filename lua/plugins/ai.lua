@@ -43,10 +43,14 @@ return {
         },
         input_window = {
           -- Only submit on <CR> when it's in normal mode.
-          ['<CR>'] = { 'submit_input_prompt', mode = 'n' },
+          ['<cr>'] = { 'submit_input_prompt', mode = { 'n' } },
           -- Switch modes like in CLI
           ['<tab>'] = { 'switch_mode', mode = 'n' },
         },
+      },
+      -- I want to control the context explicitly.
+      context = {
+        enabled = false,
       },
     },
   },
