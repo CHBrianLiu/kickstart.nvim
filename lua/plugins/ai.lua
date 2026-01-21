@@ -46,6 +46,8 @@ return {
           ['<cr>'] = { 'submit_input_prompt', mode = { 'n' } },
           -- Switch modes like in CLI
           ['<tab>'] = { 'switch_mode', mode = 'n' },
+          -- New session
+          ['<leader>n'] = { 'open_input_new_session', mode = 'n' },
         },
       },
       -- I want to control the context explicitly.
