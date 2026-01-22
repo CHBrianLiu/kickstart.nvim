@@ -228,4 +228,9 @@ return {
       'rcarriga/nvim-notify',
     },
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
 }
