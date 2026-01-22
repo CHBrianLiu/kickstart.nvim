@@ -165,6 +165,6 @@ return {
     },
   },
 
-  -- Note: this plugin may help with project specific LSP config.
+  -- TODO: this plugin may help with project specific LSP config.
   -- { "folke/neoconf.nvim" },
 }
