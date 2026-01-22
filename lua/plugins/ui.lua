@@ -186,4 +186,16 @@ return {
       vim.opt.foldlevelstart = 99
     end,
   },
+  -- The cursor movement animation
+  {
+    'sphamba/smear-cursor.nvim',
+    opts = {},
+  },
+  -- Scrolling instead of jumping
+  {
+    'karb94/neoscroll.nvim',
+    opts = {
+      performance_mode = true,
+    },
+  },
 }
