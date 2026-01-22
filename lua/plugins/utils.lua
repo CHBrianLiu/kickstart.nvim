@@ -14,19 +14,27 @@ return {
   },
   -- Jump to anywhere
   {
-    'https://codeberg.org/andyg/leap.nvim.git',
-    keys = {
-      { 's', '<Plug>(leap)', mode = { 'n', 'x', 'o' } },
-      { 'S', '<Plug>(leap-from-window)', mode = { 'n' } },
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    ---@type Flash.Config
+    opts = {
+      modes = {
+        search = {
+          -- no need to enable search because jump basically work like that
+          enabled = false,
+        },
+        char = {
+          jump_labels = true,
+        },
+      },
     },
-    config = function()
-      -- Highly recommended: define a preview filter to reduce visual noise
-      -- and the blinking effect after the first keypress (see
-      -- `:h leap.opts.preview`).
-      -- For example, skip preview if the first character of the match is
-      -- whitespace or is in the middle of an alphabetic word:
-      require('leap').opts.preview = function(ch0, ch1, ch2) return not (ch1:match '%s' or (ch0:match '%a' and ch1:match '%a' and ch2:match '%a')) end
-    end,
+    keys = {
+      { 's', mode = { 'n', 'x', 'o' }, function() require('flash').jump() end, desc = 'Flash' },
+      { 'S', mode = { 'n', 'x', 'o' }, function() require('flash').treesitter() end, desc = 'Flash Treesitter' },
+      { 'r', mode = 'o', function() require('flash').remote() end, desc = 'Remote Flash' },
+      { 'R', mode = { 'o', 'x' }, function() require('flash').treesitter_search() end, desc = 'Treesitter Search' },
+      { '<c-s>', mode = { 'c' }, function() require('flash').toggle() end, desc = 'Toggle Flash Search' },
+    },
   },
   {
     'gbprod/yanky.nvim',
