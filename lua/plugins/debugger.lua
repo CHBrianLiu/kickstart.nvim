@@ -10,6 +10,13 @@ return {
       { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Debug: Conditional Breakpoint' },
       { '<leader>dr', function() require('dap').repl.open() end, desc = 'Debug: Open REPL' },
       { '<leader>du', function() require('dapui').toggle() end, desc = 'Debug: Toggle UI' },
+      { '<leader>dt', function() require('dap').terminate() end, desc = 'Debug: Terminate' },
+      { '<leader>dC', function() require('dap').run_to_cursor() end, desc = 'Debug: Run to Cursor' },
+      { '<leader>dl', function() require('dap').run_last() end, desc = 'Debug: Run Last' },
+      { '<leader>dk', function() require('dap').up() end, desc = 'Debug: Stack Up' },
+      { '<leader>dj', function() require('dap').down() end, desc = 'Debug: Stack Down' },
+      { '<leader>dh', function() require('dap.ui.widgets').hover() end, desc = 'Debug: Hover' },
+      { '<leader>dx', function() require('dap').clear_breakpoints() end, desc = 'Debug: Clear Breakpoints' },
     },
   },
   { -- Mason integration for debug adapters
