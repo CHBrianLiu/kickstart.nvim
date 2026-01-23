@@ -14,6 +14,8 @@ return {
     },
     opts = {
       preferred_picker = 'telescope',
+      preferred_completion = 'blink',
+      default_mode = 'plan',
       default_global_keymaps = false, -- Disable defaults to use custom <leader>a
 
       -- We use opts.keymap instead of lazy.nvim's 'keys' because opencode.nvim
