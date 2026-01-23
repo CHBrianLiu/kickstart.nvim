@@ -1,10 +1,19 @@
 -- Language-specific debug adapter configurations
 local dap = require 'dap'
+local mason_registry_ok, mason_registry = pcall(require, 'mason-registry')
 
 -- Python debugging
+local debugpy_path = nil
+if mason_registry_ok and mason_registry.has_package 'debugpy' then
+  local debugpy = mason_registry.get_package 'debugpy'
+  if debugpy and debugpy:is_installed() then
+    debugpy_path = vim.fn.expand '$MASON/packages/debugpy' .. '/venv/bin/python'
+  end
+end
+
 dap.adapters.python = {
   type = 'executable',
-  command = 'python',
+  command = debugpy_path or 'python',
   args = { '-m', 'debugpy.adapter' },
 }
 
