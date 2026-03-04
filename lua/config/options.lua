@@ -91,3 +91,5 @@ vim.diagnostic.config {
     },
   },
 }
+
+vim.g.have_nerd_font = true
