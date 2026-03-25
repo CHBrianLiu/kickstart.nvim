@@ -54,7 +54,7 @@ return {
       },
       -- I want to control the context explicitly.
       context = {
-        enabled = false,
+        enabled = true,
       },
     },
   },
