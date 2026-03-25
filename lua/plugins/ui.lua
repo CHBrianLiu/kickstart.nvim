@@ -51,6 +51,22 @@ return {
     enabled = vim.g.have_nerd_font,
   },
 
+  -- Make tabline prettier
+  {
+    'nanozuki/tabby.nvim',
+    opts = {
+      preset = 'tab_only',
+      option = {
+        nerdfont = true,
+        lualine_theme = 'nordfox',
+        tab_name = {
+          -- If the tab is not named explicitly, just show the tab id.
+          name_fallback = function() return '' end,
+        },
+      },
+    },
+  },
+
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
