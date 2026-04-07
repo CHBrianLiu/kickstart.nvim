@@ -2,23 +2,25 @@
 -- Scratch Pad Commands
 -- ============================================================================
 -- These commands provide a persistent scratch pad workflow:
---   :Scratch [filetype]  – create a new timestamped file and open it in a tab
+--   :Scratch [filetype]  – create a new timestamped file and open it in the current window
+--   :Scratch! [filetype] – same, but opens in a new tab
 --   :ScratchList         – browse all previous scratch files with Telescope
 -- ============================================================================
 
 --- Directory where all scratch files are stored.
 local SCRATCH_DIR = vim.fn.expand '~/.local/state/nvim/scratch'
 
--- `:Scratch [filetype]`
+-- `:Scratch [filetype]` / `:Scratch! [filetype]`
 --
--- Creates a new scratch file in SCRATCH_DIR with a timestamp-based name, then
--- opens it in a new tab.  The file is written to disk immediately so it
--- survives a crash even if the user never explicitly saves.
+-- Creates a new scratch file in SCRATCH_DIR with a timestamp-based name.
+-- Without `!` the file opens in the current window; with `!` it opens in a
+-- new tab.  The file is written to disk immediately so it survives a crash
+-- even if the user never explicitly saves.
 --
 -- Examples:
---   :Scratch          → ~/.local/state/nvim/scratch/2026-03-25_14-30-05.md
---   :Scratch json     → ~/.local/state/nvim/scratch/2026-03-25_14-30-05.json
---   :Scratch python   → ~/.local/state/nvim/scratch/2026-03-25_14-30-05.python
+--   :Scratch          → opens ~/.local/state/nvim/scratch/2026-03-25_14-30-05.md in current window
+--   :Scratch json     → opens …/2026-03-25_14-30-05.json in current window
+--   :Scratch! python  → opens …/2026-03-25_14-30-05.python in a new tab
 vim.api.nvim_create_user_command('Scratch', function(opts)
   -- Determine the file extension.
   -- Default to "md" when no argument is supplied.
@@ -37,9 +39,14 @@ vim.api.nvim_create_user_command('Scratch', function(opts)
   -- does NOT error if the directory already exists.
   vim.fn.mkdir(SCRATCH_DIR, 'p')
 
-  -- Open the file in a new tab.  Using 'tabedit' causes Neovim to create a
-  -- new tab page whose active buffer is the given path.
-  vim.cmd('tabedit ' .. vim.fn.fnameescape(filepath))
+  -- Open the file in the current window (default) or a new tab (with bang).
+  -- :Scratch   → edit in current window
+  -- :Scratch!  → open in a new tab
+  if opts.bang then
+    vim.cmd('tabedit ' .. vim.fn.fnameescape(filepath))
+  else
+    vim.cmd('edit ' .. vim.fn.fnameescape(filepath))
+  end
 
   -- Write the (empty) buffer to disk immediately so the file physically
   -- exists. This is important so that :ScratchList can find it even if the
@@ -50,7 +57,9 @@ vim.api.nvim_create_user_command('Scratch', function(opts)
 end, {
   -- Allow an optional single-word argument (the file extension).
   nargs = '?',
-  desc = 'Create a new timestamped scratch file (optional filetype arg)',
+  -- bang = true enables the :Scratch! variant (open in new tab).
+  bang = true,
+  desc = 'Create a new timestamped scratch file; ! opens in new tab',
 })
 
 -- `:ScratchList`
