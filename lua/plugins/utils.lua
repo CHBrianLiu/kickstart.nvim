@@ -51,4 +51,13 @@ return {
       { 'gP', '<Plug>(YankyGPutBefore)', mode = { 'n', 'x' }, desc = 'Put yanked text before selection' },
     },
   },
+  {
+    'mistweaverco/kulala.nvim',
+    keys = {},
+    ft = { 'http', 'rest' },
+    opts = {
+      -- your configuration comes here
+      global_keymaps = true,
+    },
+  },
 }
