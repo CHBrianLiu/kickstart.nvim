@@ -60,4 +60,9 @@ return {
       global_keymaps = true,
     },
   },
+  -- Change input method to en-us whenever switch to normal mode.
+  {
+    'keaising/im-select.nvim',
+    config = function() require('im_select').setup {} end,
+  },
 }
