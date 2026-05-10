@@ -2,7 +2,6 @@ return {
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -198,7 +197,15 @@ return {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     branch = 'main',
-    main = 'nvim-treesitter', -- Sets main module to use for opts
+    config = function(_, opts)
+      local ts_path = vim.fn.stdpath('data') .. '/lazy/nvim-treesitter'
+      -- Prefer Neovim's bundled parsers when available. This avoids stale parser
+      -- binaries under the plugin directory shadowing the built-in parsers.
+      vim.opt.runtimepath:remove(ts_path)
+      vim.opt.runtimepath:append(ts_path)
+
+      require('nvim-treesitter').setup(opts)
+    end,
     opts = {
       ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
