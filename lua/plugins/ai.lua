@@ -12,6 +12,24 @@ return {
       'folke/snacks.nvim',
       'nvim-telescope/telescope.nvim',
     },
+    init = function()
+      -- `opencode_output` uses Markdown treesitter, but switching an existing buffer
+      -- to that filetype does not always restart the highlighter automatically.
+      -- Re-start treesitter on FileType so both regular buffers and Opencode UI
+      -- buffers keep Markdown highlighting and render-markdown decorations.
+      local group = vim.api.nvim_create_augroup('OpencodeTreesitterMarkdown', { clear = true })
+      vim.api.nvim_create_autocmd('FileType', {
+        group = group,
+        pattern = { 'opencode', 'opencode_output' },
+        callback = function(args)
+          local filetype = vim.bo[args.buf].filetype
+          local lang = vim.treesitter.language.get_lang(filetype)
+          if lang then
+            pcall(vim.treesitter.start, args.buf, lang)
+          end
+        end,
+      })
+    end,
     opts = {
       preferred_picker = 'telescope',
       preferred_completion = 'blink',
