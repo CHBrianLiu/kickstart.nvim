@@ -224,9 +224,8 @@ return {
   -- Scrolling instead of jumping
   {
     'karb94/neoscroll.nvim',
-    opts = {
-      performance_mode = true,
-    },
+    opts = {},
+    enabled = false,
   },
   -- beautiful notifications
   {
