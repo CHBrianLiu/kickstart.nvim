@@ -13,8 +13,6 @@ require 'config.autocmds'
 -- Bootstrap lazy.nvim and load plugins
 require 'config.lazy'
 
--- Load snippets
-require 'config.snippets'
 require 'config.dap'
 
 -- Load user-specific configuration if it exists
