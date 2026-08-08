@@ -1,5 +1,15 @@
 return {
-  { 'tpope/vim-surround' },
+  {
+    'tpope/vim-surround',
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        callback = function(args)
+          vim.b[args.buf].surround_98 = '**\r**' -- 98 = string.byte("b")
+        end,
+      })
+    end,
+  },
   { 'nvim-mini/mini.pairs', version = false, opts = {} },
   {
     'nvim-mini/mini.sessions',
