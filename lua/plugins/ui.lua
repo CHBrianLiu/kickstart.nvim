@@ -23,6 +23,8 @@ return {
       groups = {
         nordfox = {
           Substitute = { fg = 'bg1', bg = 'palette.yellow', style = 'bold' },
+          -- Use bright red for readable bold text while preserving Nordfox's original accent.
+          ['@markup.strong'] = { fg = 'palette.red.bright', style = 'bold' },
         },
       },
     },
