@@ -19,6 +19,8 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+
+      'benfowler/telescope-luasnip.nvim',
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -71,6 +73,7 @@ return {
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'yank_history')
+      pcall(require('telescope').load_extension, 'luasnip')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -198,7 +201,7 @@ return {
     build = ':TSUpdate',
     branch = 'main',
     config = function(_, opts)
-      local ts_path = vim.fn.stdpath('data') .. '/lazy/nvim-treesitter'
+      local ts_path = vim.fn.stdpath 'data' .. '/lazy/nvim-treesitter'
       -- Prefer Neovim's bundled parsers when available. This avoids stale parser
       -- binaries under the plugin directory shadowing the built-in parsers.
       vim.opt.runtimepath:remove(ts_path)
