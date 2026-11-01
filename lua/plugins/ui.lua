@@ -25,18 +25,48 @@ return {
           Substitute = { fg = 'bg1', bg = 'palette.yellow', style = 'bold' },
           -- Use bright red for readable bold text while preserving Nordfox's original accent.
           ['@markup.strong'] = { fg = 'palette.red.bright', style = 'bold' },
+          WinSeparator = { fg = 'palette.blue.base' },
+        },
+        dayfox = {
+          WinSeparator = { style = 'bold' },
+          -- Give the normal-mode block a bright amber background for visibility.
+          DayfoxNormalCursor = { fg = '#202020', bg = '#E5AD45' },
+          -- Keep the insert cursor blue; its foreground is used where supported.
+          DayfoxInsertCursor = { fg = '#FFFFFF', bg = '#245FA6' },
+
+          -- Replace OpenCode's light-theme defaults with readable Dayfox colors.
+          OpencodeInputLegend = { fg = 'fg2', bg = 'bg0' },
+          OpencodeContextualActions = { fg = 'palette.blue.base', bg = 'bg0', style = 'bold' },
+          OpencodeAgentPlan = { fg = 'bg1', bg = 'palette.blue.base', style = 'bold' },
+          OpencodeAgentBuild = { fg = 'bg1', bg = 'fg2', style = 'bold' },
+          OpencodeAgentCustom = { fg = 'bg1', bg = 'palette.magenta.base', style = 'bold' },
+
+          OpencodeBorder = { fg = 'bg4' },
+          OpencodeToolBorder = { fg = 'bg4', style = 'nocombine' },
+          OpencodeQuestionBorder = { fg = 'palette.blue.base' },
+          OpencodePermissionBorder = { fg = 'palette.yellow.base', style = 'nocombine' },
+          OpencodePermissionTitle = { fg = 'palette.yellow.base' },
+          OpencodeQueued = { fg = 'palette.yellow.base', style = 'bold' },
+          OpencodeGuardDenied = { fg = 'palette.red.base', style = 'bold' },
+
+          -- Match the dark-theme defaults' semantic links for context labels.
+          OpencodeContextCurrentFile = { link = '@label' },
+          OpencodeContextError = { link = 'DiagnosticError' },
         },
       },
     },
     config = function(_, opts)
       require('nightfox').setup(opts)
 
-      local colorscheme = 'nordfox'
+      local colorscheme = 'dayfox'
+      vim.opt.termguicolors = true
       vim.cmd.colorscheme(colorscheme)
-
-      -- use alternative color for the window separaters
-      local palette = require('nightfox.palette').load(colorscheme)
-      vim.cmd('highlight! WinSeparator guifg=' .. palette.blue.base .. ' guibg=NONE')
+      -- Use an amber block in normal/visual/command-line mode and a wider blue
+      -- vertical bar in insert-like modes (ver60 is 60% of the cell width).
+      vim.opt.guicursor:append {
+        'n-v-c:block-DayfoxNormalCursor',
+        'i-ci-ve:ver60-DayfoxInsertCursor',
+      }
     end,
   },
 
@@ -45,7 +75,7 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     opts = {
       options = {
-        theme = 'nordfox',
+        theme = 'dayfox',
         component_separators = '|',
         section_separators = '',
       },
@@ -60,7 +90,7 @@ return {
       preset = 'tab_only',
       option = {
         nerdfont = true,
-        lualine_theme = 'nordfox',
+        lualine_theme = 'dayfox',
         tab_name = {
           -- If the tab is not named explicitly, just show the tab id.
           name_fallback = function() return '' end,
